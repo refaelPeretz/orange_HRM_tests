@@ -17,7 +17,7 @@ public class ExtentReportManager {
 
             extent = new ExtentReports();
             extent.attachReporter(sparkReporter);
-            extent.setSystemInfo("Tester", "Refael peretz");
+            extent.setSystemInfo("Tester", "Refael Peretz");
             extent.setSystemInfo("Environment", "QA");
         }
         return extent;

@@ -5,17 +5,21 @@ import org.example.base.ExtentReportManager;
 import com.aventstack.extentreports.ExtentTest;
 import org.example.pages.LoginPage;
 import org.example.pages.AdminPage;
+import org.example.pages.UserPage;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class LoginTest {
     private LoginPage loginPage;
     private AdminPage adminPage;
+    private UserPage userPage;
+
     private static ExtentTest test;
 
     @BeforeAll
@@ -30,6 +34,8 @@ public class LoginTest {
 
         loginPage = new LoginPage(BaseDriver.getDriver());
         adminPage = new AdminPage(BaseDriver.getDriver());
+        userPage = new UserPage(BaseDriver.getDriver());
+
         test = ExtentReportManager.createTest("Login Test");
     }
 
@@ -83,6 +89,20 @@ public class LoginTest {
             BaseDriver.takeScreenshot("testNewUserLogin");
             test.fail("Login as new user failed");
         }
+
+        test.info("Validating user menu tabs");
+
+        if (userPage.validateMenuTabs()) {
+            test.pass("User menu tabs validated successfully");
+        } else {
+            BaseDriver.takeScreenshot("menuTabsMismatch");
+            test.fail("User menu tabs do not match the expected ones! \n" +
+                    "Expected: " + String.join(", ", UserPage.EXPECTED_TABS) + "\n" +
+                    "Actual: " + String.join(", ", userPage.getMenuTabs()));
+        }
+        assertTrue(userPage.validateMenuTabs(), "User menu tabs do not match the expected ones!");
+
+
     }
 
     @AfterEach
