@@ -61,18 +61,19 @@ public class LoginTest {
             return;
         }
 
-        // Step 2: Perform Admin Actions - Create a new user
+        //   Perform Admin Actions - Create a new user
         test.info("Navigating to PIM section to add a new employee");
         adminPage.navigateToPim();
         adminPage.addEmployee("TestFirstName", "TestLastName", "TestUser", "testpassword123", "testpassword123");
+
         test.pass("New employee created successfully");
 
-        // Step 3: Logout as Admin
+        //  Logout as Admin
         test.info("Logging out as Admin");
         adminPage.logout();
         test.pass("Logged out as Admin");
 
-        // Step 4: Login as the new user
+        // Login as the new user
         test.info("Logging in as the newly created user");
         loginPage.setUserame("TestUser");
         test.info("Entered username: TestUser");

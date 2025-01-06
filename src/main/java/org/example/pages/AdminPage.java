@@ -55,7 +55,7 @@ public class AdminPage {
 
     public void addEmployee(String firstName, String lastName, String username, String password, String confirmPassword) {
         try {
-        addEmployeeTab.click();
+            addEmployeeTab.click();
             Thread.sleep(500);
             firstNameField.sendKeys(firstName);
             Thread.sleep(500);
