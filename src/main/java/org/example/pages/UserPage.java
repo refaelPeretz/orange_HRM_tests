@@ -15,31 +15,27 @@ public class UserPage {
         PageFactory.initElements(driver, this);
     }
 
-    // מציאת כל הלשוניות בתוך התפריט
+    // Find all the tabs in the menu
     @FindBy(css = "ul.oxd-main-menu > li")
     private List<WebElement> menuItems;
 
-    // הרשימה הצפויה של הלשוניות (נכתבת אופקית בקוד)
+    // The expected list of tabs (written horizontally in the code)
     public static final List<String> EXPECTED_TABS = List.of("Leave", "Time", "My Info",
             "Performance", "Dashboard", "Directory", "Claim", "Buzz");
 
-    /**
-     * מחזירה רשימה של שמות הלשוניות כפי שהן מופיעות בתפריט בפועל.
-     */
+    // Method to get the text of all menu tabs
     public List<String> getMenuTabs() {
         return menuItems.stream()
                 .map(tab -> tab.getText().trim())
                 .toList();
     }
 
-    /**
-     * בודקת האם רשימת הלשוניות בפועל תואמת את הרשימה הצפויה.
-     */
+    // Method to check if the actual tabs match the expected tabs
     public boolean validateMenuTabs() {
         List<String> actualTabs = getMenuTabs();
         if (!actualTabs.equals(EXPECTED_TABS)) {
-            System.out.println("Expected Tabs: " + EXPECTED_TABS);
-            System.out.println("Actual Tabs: " + actualTabs);
+            System.out.println("Expected Tabs: " + EXPECTED_TABS); // Print the expected tabs
+            System.out.println("Actual Tabs: " + actualTabs); // Print the actual tabs
             return false;
         }
         return true;
